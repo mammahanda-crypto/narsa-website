@@ -41,7 +41,7 @@ Route::middleware('auth')->group(function () {
 
     // Employee & Attestations (المسارات المهمة)
     Route::get('/employees/{id}/attestation', [EmployeeController::class, 'showAttestation'])->name('employees.attestation');
-    Route::get('/employees/{employee}/attestation-ar', [EmployeeController::class, 'attestationAr'])->name('employees.attestationAr');
+    Route::get('/employees/{employee}/attestation-ar', [EmployeeController::class, 'showAttestation'])->name('employees.attestationAr');
     
     Route::resource('employees', EmployeeController::class);
 
