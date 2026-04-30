@@ -386,7 +386,7 @@
                     <!-- Footer -->
                     <div class="mt-8 pt-6 border-t border-gray-200 text-center">
                         <p class="text-xs text-gray-500">
-                            &copy; 2024 Votre Entreprise. Tous droits réservés.
+                            &copy; 2026 NARSA. Tous droits réservés.
                         </p>
                     </div>
                 </div>

@@ -4,7 +4,7 @@
             <div class="flex">
                 <div class="shrink-0 flex items-center">
                     <a href="{{ route('dashboard') }}">
-                        <img src="{{ asset('images/logo_narsa.png') }}" class="block h-10 w-auto" alt="Logo NARSA">
+                        <img src="{{ asset('images/narsa_logo_2.jpg') }}" class="block h-10 w-auto" alt="Logo NARSA">
                     </a>
                 </div>
 

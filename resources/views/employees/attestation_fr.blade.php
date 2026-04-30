@@ -142,10 +142,10 @@
             de Laâyoune Sakai El Hamra et Dakhla Oued Eddahab.
         </div>
 
-        <div class="footer">
+        <div class="footer text-center">
             <div style="display: flex; align-items: center;">
-                <img src="/path-to-your-logo/narsa_small.png" width="50" style="margin-right: 10px;">
-                <small>NARSA</small>
+                <img src="{{ asset ('/images/logo_narsa.png') }}" width="50" style="margin-right: 10px;">
+                {{-- <small>NARSA</small> --}}
             </div>
             <div style="text-align: center; flex-grow: 1;">
                 ملتقى شارع الزرقطوني بشارع الأمين فيلا الخير حي مولاي رشيد العيون<br>

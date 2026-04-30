@@ -35,7 +35,7 @@
             <footer class="bg-slate-800 text-white py-6 mt-10">
                 <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 flex justify-between items-center">
                     <div>
-                        <img src="{{ asset('images/logo_narsa.png') }}" class="h-10 bg-white p-1 rounded" alt="NARSA logo">
+                        <img src="{{ asset('images/narsa_logo_2.jpg') }}" style="width: 100%;" class="h-10 bg-white p-1 rounded" alt="NARSA logo">
                     </div>
                     <div class="text-sm">
                         <strong>Contact Support:</strong> 0528891774 | support@narsa.gov.ma

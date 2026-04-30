@@ -6,18 +6,19 @@
     @vite('resources/css/app.css')
 </head>
 
-<body class="min-h-screen flex items-center justify-center bg-gradient-to-r from-indigo-600 to-purple-700">
+<body class="min-h-screen flex items-center justify-center" style="background-color: #475ea3">
 
     <div class="w-full max-w-md bg-white rounded-3xl shadow-2xl p-10">
 
-        <div class="text-center mb-8">
-            <div class="w-14 h-14 mx-auto bg-indigo-600 text-white rounded-xl flex items-center justify-center shadow-lg">
-                🔒
+        <div class="text-center">
+            <div class="h-14 mx-auto bg-w-600 text-white rounded-xl flex items-center justify-center" style="width:8rem;margin-bottom : 1rem">
+                <img src="{{ asset('images/narsa_logo_1.png') }}" alt="narsa_logo">
             </div>
-            <h1 class="text-3xl font-bold mt-4">Espace Gestion</h1>
-            <p class="text-gray-500">Heureux de vous revoir !</p>
+            {{-- <h1 class="text-xl mt-2">Espace Gestion</h1> --}}
         </div>
-
+        <div class="text-center" style="margin-bottom: -0.75rem;margin-top:o.75rem;font-size:85%">
+            <p class="text-gray-500 mt-3">Heureux de vous revoir !</p>
+        </div>
         @if ($errors->any())
             <div class="bg-red-100 text-red-600 p-3 rounded-lg mb-6 border-l-4 border-red-500">
                 Identifiants invalides
@@ -42,16 +43,16 @@
             <div class="flex items-center">
                 <input type="checkbox" name="remember" id="remember" class="mr-2">
                 <label for="remember">Rester connecté</label>
-            </div>
-              <div class="flex items-center">
-                <input type="checkbox" name="remember" id="remember" class="mr-2">
-             <a href="{{ route('register') }}" class="text-sm text-indigo-600 hover:underline ml-auto"> crer un compte</a>
+            {{-- </div> --}}
+              {{-- <div class="flex items-center"> --}}
+                {{-- <input type="checkbox" name="remember" id="remember" class="mr-2"> --}}
+             <a href="{{ route('register') }}" class="text-sm text-indigo-600 hover:underline ml-auto"> créer un compte</a>
             </div>
 
-            <button type="submit"
-                class="w-full bg-gradient-to-r from-indigo-600 to-purple-600 text-white p-3 rounded-xl font-semibold shadow-lg hover:scale-105 transition">
-                Se connecter
-            </button>
+        <button type="submit"
+            class="w-full text-white p-3 rounded-xl font-semibold shadow-lg bg-[#475ea3] hover:bg-[#3b4f8f] hover:scale-105 transition">
+            Se connecter
+        </button>
         </form>
 
     </div>
