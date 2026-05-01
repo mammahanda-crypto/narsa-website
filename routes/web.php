@@ -1,13 +1,14 @@
 <?php
 
-use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\Auth\AuthenticatedSessionController;
 use App\Http\Controllers\Auth\RegisteredUserController;
-use App\Http\Controllers\EmployeeController;
-use App\Http\Controllers\ProfileController;
 use App\Http\Controllers\CongeController;
 use App\Http\Controllers\DocumentController;
+use App\Http\Controllers\EmployeeController;
 use App\Http\Controllers\logtController;
+use App\Http\Controllers\ProfileController;
+use Illuminate\Support\Facades\Request;
+use Illuminate\Support\Facades\Route;
 
 Route::get('/', function () {
     return redirect()->route('login');
@@ -46,24 +47,40 @@ Route::middleware('auth')->group(function () {
     Route::resource('employees', EmployeeController::class);
 
     // Profile
-    Route::get('/profile', [ProfileController::class, 'edit'])->name('profile.edit');
-    Route::patch('/profile', [ProfileController::class, 'update'])->name('profile.update');
-    Route::delete('/profile', [ProfileController::class, 'destroy'])->name('profile.destroy');
+    Route::middleware(['auth'])->group(function () {
+    
+        Route::get('/profile', function () {
+            return view('profile.edit');
+        })->name('profile.edit');
+    
+        Route::patch('/profile', [ProfileController::class, 'update'])
+            ->name('profile.update');
+    
+        Route::delete('/profile', [ProfileController::class, 'destroy'])
+            ->name('profile.destroy');
+    
+    });
 
-// L-group dyal les routes dyal les documents
-Route::controller(logtController::class)->group(function () {
-    
-    Route::get('/documents', 'index')->name('documents.index');
-    
-    // Formulaires (Create/Edit)
-    Route::get('/documents/create', 'create')->name('documents.create');
-    Route::get('/documents/{id}/edit', 'edit')->name('documents.edit');
-    
-    // Actions (POST/PUT/DELETE)
-    Route::post('/documents/store', 'store')->name('documents.store');
-    Route::put('/documents/update/{id}', 'update')->name('documents.update');
-    Route::delete('/documents/delete/{id}', 'destroy')->name('documents.destroy');
-    
-});
-});
+    // Email Verification
+    Route::post('/email/verification-notification', function (Request $request) {
+        $request->user()->sendEmailVerificationNotification();
+        return back()->with('message', 'Verification link sent!');
+    })->middleware(['auth', 'throttle:6,1'])->name('verification.send');
 
+    // L-group dyal les routes dyal les documents
+    Route::controller(logtController::class)->group(function () {
+        
+        Route::get('/documents', 'index')->name('documents.index');
+        
+        // Formulaires (Create/Edit)
+        Route::get('/documents/create', 'create')->name('documents.create');
+        Route::get('/documents/{id}/edit', 'edit')->name('documents.edit');
+        
+        // Actions (POST/PUT/DELETE)
+        Route::post('/documents/store', 'store')->name('documents.store');
+        Route::put('/documents/update/{id}', 'update')->name('documents.update');
+        Route::delete('/documents/delete/{id}', 'destroy')->name('documents.destroy');
+    });
+    });
+    
+    
