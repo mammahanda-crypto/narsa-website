@@ -346,11 +346,15 @@
                         <!-- Conditions d'utilisation -->
                         <div class="flex items-start gap-3 pt-2 animate-slide-in animation-delay-400">
                             <input type="checkbox" id="terms" required class="mt-1 w-4 h-4 text-indigo-600 border-gray-300 rounded focus:ring-indigo-500">
-                            <label for="terms" class="text-sm text-gray-600">
-                                J'accepte les 
-                                <a href="#" class="text-indigo-600 hover:text-indigo-500 font-medium hover:underline">conditions d'utilisation</a> 
-                                et la 
-                                <a href="#" class="text-indigo-600 hover:text-indigo-500 font-medium hover:underline">politique de confidentialité</a>
+                           <label for="terms" class="text-sm text-gray-600">
+                                J'accepte les
+                                <a href="{{ route('conditions') }}" class="text-indigo-600 hover:underline font-medium">
+                                    conditions d'utilisation
+                                </a>
+                                et la
+                                <a href="{{ route('privacy') }}" class="text-indigo-600 hover:underline font-medium">
+                                    politique de confidentialité
+                                </a>
                             </label>
                         </div>
 

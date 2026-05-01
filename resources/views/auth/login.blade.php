@@ -46,7 +46,7 @@
             {{-- </div> --}}
               {{-- <div class="flex items-center"> --}}
                 {{-- <input type="checkbox" name="remember" id="remember" class="mr-2"> --}}
-             <a href="{{ route('register') }}" class="text-sm text-indigo-600 hover:underline ml-auto"> créer un compte</a>
+             <a href="{{ route('register') }}" class="text-sm text-indigo-600 hover:underline ml-auto">Créer un compte</a>
             </div>
 
         <button type="submit"

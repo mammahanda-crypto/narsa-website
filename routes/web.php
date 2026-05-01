@@ -87,4 +87,5 @@ Route::middleware('auth')->group(function () {
     });
     });
     
-    
+    Route::view('/conditions', 'legal.conditions')->name('conditions');
+    Route::view('/confidentialite', 'legal.privacy')->name('privacy');
