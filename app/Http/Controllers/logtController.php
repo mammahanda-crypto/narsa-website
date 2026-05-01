@@ -27,6 +27,7 @@ class logtController extends Controller
      */
     public function store(Request $request)
     {
+        $documents = Document::orderBy('created_at', 'desc')->get();
         $request->validate([
             'title'    => 'required|string|max:255',
             'pdf_file' => 'required|mimes:pdf|max:10000',
@@ -40,10 +41,12 @@ class logtController extends Controller
                 'file_path' => $path,
             ]);
 
-            return back()->with('success', 'PDF t-ajouta b nija7!');
+            // return back()->with('success', 'The File Was Added Successfully!');
+        return view('documents.index', compact('documents'));
+
         }
 
-        return back()->with('error', 'Chi haja machi hya dik f l-upload.');
+        return back()->with('error', 'An Error Occured.');
     }
 
     /**
@@ -71,7 +74,10 @@ class logtController extends Controller
 
         $doc->save();
 
-        return back()->with('success', 'PDF t-modifia b nija7!');
+        // return back()->with('success', 'PDF t-modifia b nija7!');
+            $documents = Document::orderBy('created_at', 'desc')->get();
+            return view('documents.index', compact('documents'));
+
     }
 
     /**

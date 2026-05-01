@@ -19,7 +19,9 @@
                     <tr class="border-b text-center">
                         <td class="p-4">{{ $doc->title }}</td>
                         <td class="p-4">
-                            <a href="{{ asset('storage/' . $doc->file_path) }}" target="_blank" class="text-blue-500">Voir</a>
+                            <a href="{{ Storage::url($doc->file_path) }}" target="_blank" class="text-blue-500">
+                                Voir
+                            </a>
                             <a href="{{ route('documents.edit', $doc->id) }}" class="text-yellow-500 mx-2">Modifier</a>
                             <form action="{{ route('documents.destroy', $doc->id) }}" method="POST" class="inline">
                                 @csrf @method('DELETE')
