@@ -1,6 +1,7 @@
 <?php
 
 use App\Http\Controllers\Auth\AuthenticatedSessionController;
+use App\Http\Controllers\Auth\PasswordController;
 use App\Http\Controllers\Auth\RegisteredUserController;
 use App\Http\Controllers\CongeController;
 use App\Http\Controllers\DocumentController;
@@ -48,10 +49,8 @@ Route::middleware('auth')->group(function () {
 
     // Profile
     Route::middleware(['auth'])->group(function () {
-    
-        Route::get('/profile', function () {
-            return view('profile.edit');
-        })->name('profile.edit');
+        Route::get('/profile', [ProfileController::class, 'edit'])
+            ->name('profile.edit');
     
         Route::patch('/profile', [ProfileController::class, 'update'])
             ->name('profile.update');
@@ -59,6 +58,11 @@ Route::middleware('auth')->group(function () {
         Route::delete('/profile', [ProfileController::class, 'destroy'])
             ->name('profile.destroy');
     
+    });
+
+    Route::middleware(['auth'])->group(function () {
+        Route::put('/password', [PasswordController::class, 'update'])
+            ->name('password.update');
     });
 
     // Email Verification

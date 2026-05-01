@@ -16,7 +16,7 @@
             </div>
             {{-- <h1 class="text-xl mt-2">Espace Gestion</h1> --}}
         </div>
-        <div class="text-center" style="margin-bottom: -0.75rem;margin-top:o.75rem;font-size:85%">
+        <div class="text-center" style="margin-bottom: 0.25rem;margin-top:o.75rem;font-size:85%">
             <p class="text-gray-500 mt-3">Heureux de vous revoir !</p>
         </div>
         @if ($errors->any())
