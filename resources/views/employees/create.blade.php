@@ -55,7 +55,7 @@
                         {{-- Localité --}}
                         <div class="md:col-span-2">
                             <label class="block text-sm font-medium text-gray-700">Effet localité à la direction</label>
-                            <input type="text" name="effet_localite_direction" value="{{ old('effet_localite_direction') }}" 
+                            <input type="date" name="effet_localite_direction" value="{{ old('effet_localite_direction') }}" 
                                    class="mt-1 block w-full border-gray-300 rounded-md shadow-sm focus:ring-blue-500 focus:border-blue-500" required>
                         </div>
                     </div>
