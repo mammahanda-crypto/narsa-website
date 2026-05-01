@@ -10,7 +10,6 @@
         @for ($i = 1; $i <= 4; $i++)
             <div class="doc-card">
                 <div class="doc-paper">
-                    <!-- هنا تقدر تحط contenu dyal document -->
                 </div>
                 <span class="doc-label">Document {{ $i }}</span>
             </div>
