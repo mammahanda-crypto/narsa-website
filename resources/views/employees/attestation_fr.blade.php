@@ -127,7 +127,7 @@
             Le Directeur Régional de l'Agence de la Sécurité Routière de Laâyoune Sakia el Hamra et Dakhla Ouadi Eddahab, atteste par la présente que :
             
             <div class="details">
-                <div><span>Nom et Prénom</span>: <strong>{{ $employee->full_name }}</strong></div>
+                <div><span>Nom et Prénom</span>: <strong>{{ $employee->nom_prenom }}</strong></div>
                 <div><span>Grade</span>: <strong>{{ $employee->grade }}</strong></div>
                 <div><span>Effet localité à la direction</span>: <strong>{{ $employee->direction }}</strong></div>
                 <div><span>N° DRPP</span>: <strong>{{ $employee->drpp }}</strong></div>

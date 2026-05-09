@@ -1,163 +1,180 @@
 <!DOCTYPE html>
 <html dir="rtl" lang="ar">
 <head>
-    <meta charset="UTF-8">
-    <style>
-        @media print {
-            .no-print { display: none !important; }
-            body { margin: 0; padding: 0.5cm; }
-            .doc-footer { position: absolute; bottom: 0.5cm; width: 100%; }
-        }
+<meta charset="UTF-8">
 
-        body { 
-            font-family: 'Times New Roman', serif; 
-            color: #000; 
-            line-height: 1.8; 
-            direction: rtl;
-            margin: 40px;
-            min-height: 285mm;
-            position: relative;
-        }
+<style>
+/* ===== PAGE SETUP ===== */
+body {
+    font-family: 'Times New Roman', serif;
+    margin: 0;
+    background: #fff;
+}
 
-        /* --- Tashi7 l-Header o l-Logos --- */
-        .doc-header {
-            position: relative;
-            height: 180px; /* Bach l-ktiba t-bda taht l-header */
-            margin-bottom: 20px;
-        }
+.page {
+    width: 210mm;
+    min-height: 297mm;
+    margin: auto;
+    padding: 15mm;
+    box-sizing: border-box;
+    position: relative;
+}
 
-        .right-header {
-            position: absolute;
-            right: 0;
-            top: 0;
-            text-align: center;
-            width: 250px;
-        }
+/* ===== PRINT ===== */
+@media print {
+    .no-print { display: none !important; }
+    body { margin: 0; }
+    .page { width: 100%; min-height: 100%; padding: 10mm; }
+}
 
-        .left-header {
-            position: absolute;
-            left: 0;
-            top: 0;
-            text-align: center;
-            width: 200px;
-        }
+/* ===== HEADER ===== */
+.doc-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: flex-start;
+    margin-bottom: 25px;
+}
 
-        .logo-img {
-            max-width: 90px;
-            height: auto;
-            display: block;
-            margin: 5px auto;
-        }
+.right-header, .left-header {
+    text-align: center;
+    width: 35%;
+}
 
-        .doc-title {
-            text-align: center;
-            margin: 40px 0;
-            font-size: 24pt;
-            font-weight: bold;
-            text-decoration: underline;
-        }
+.logo-img {
+    max-width: 80px;
+    margin: 5px 0;
+}
 
-        .doc-body {
-            margin: 0 20px;
-            font-size: 16pt;
-        }
+/* ===== TITLE ===== */
+.doc-title {
+    text-align: center;
+    font-size: 22pt;
+    font-weight: bold;
+    margin: 25px 0;
+    text-decoration: underline;
+}
 
-        /* --- Tashi7 l-Espace --- */
-        .empty-space {
-            display: inline-block;
-            min-width: 200px; /* Bach y-koun l-espace mzyan m-bayn l-ktiba */
-            padding: 0 10px;
-        }
+/* ===== BODY ===== */
+.doc-body {
+    font-size: 15pt;
+    line-height: 1.8;
+}
 
-        .info-row {
-            margin-top: 30px;
-            margin-right: 40px;
-        }
+/* FIX TEXT OVERFLOW */
+.info-row p {
+    margin: 10px 0;
+}
 
-        .info-row p { 
-            margin: 15px 0; 
-            display: flex;
-            align-items: baseline;
-        }
+/* safer spacing than huge empty spans */
+.empty-space {
+    display: inline-block;
+    min-width: 120px;
+}
 
-        .signature-section {
-            margin-top: 60px;
-            text-align: center;
-            width: 450px;
-            margin-left: 20px;
-        }
+/* ===== SIGNATURE ===== */
+.signature-section {
+    margin-top: 60px;
+    text-align: center;
+}
 
-        .doc-footer {
-            border-top: 1.5px solid #000;
-            padding-top: 15px;
-            text-align: center;
-            width: 100%;
-        }
+/* ===== FOOTER ===== */
+.doc-footer {
+    margin-top: 40px;
+    border-top: 1px solid #000;
+    padding-top: 10px;
+    font-size: 10pt;
+    text-align: center;
+}
+</style>
 
-        .footer-content {
-            font-size: 10pt;
-            line-height: 1.4;
-        }
-    </style>
 </head>
+
 <body>
 
-    <button class="no-print" style="padding:10px; background:#059669; color:white; border:none; cursor:pointer;" onclick="window.print()">طبع الشهادة</button>
+<div class="page">
+<div class="no-print" style="text-align:center; margin: 20px 0;">
+    <button onclick="window.print()"
+        style="padding:10px 20px; background:#059669; color:white; border:none; cursor:pointer;">
+        طبع الشهادة
+    </button>
+</div>
 
-    <div class="doc-header">
-        <div class="right-header">
-            <p style="margin: 0;">المملكة المغربية</p>
-            <img src="{{ asset('images/logo_maroc.png') }}" class="logo-img" alt="Logo Maroc">
-            <p style="margin: 2px 0;">وزارة النقل واللوجستيك</p>
-            <p style="margin: 2px 0;">الوكالة الوطنية للسلامة الطرقية</p>
-            <p style="margin: 2px 0;">المديرية الجهوية للعيون</p>
-        </div>
+<!-- HEADER -->
+<div class="doc-header" style="display:flex; justify-content:space-between; align-items:flex-start;">
 
-        <div class="left-header">
-            <img src="{{ asset('images/logo_narsa.png') }}" class="logo-img" alt="Logo NARSA">
-            <p style="margin: 0;">نارسا</p>
-            <p style="margin: 0;">NARSA</p>
+    <!-- RIGHT SIDE (Morocco info) -->
+    <div style="text-align:center;">
+        <img src="/images/logo_maroc.png" alt="Logo" style="width:100px;">
+
+        <div dir="rtl" style="margin-top:5px;">
+            المملكة المغربية<br>
+            وزارة النقل واللوجستيك<br>
+            الوكالة الوطنية للسلامة الطرقية<br>
+            الوكالة الجهوية للسلامة الطرقية<br>
+            لجهتي العيون الساقية الحمراء والداخلة وادي الذهب<br>
+            العيون
         </div>
     </div>
 
-    <div style="text-align: right; margin-right: 50px; margin-top: 100px;">
+    <!-- LEFT SIDE (NARSA logo + text UNDER it) -->
+    <div style="text-align:center;">
+        <img src="{{ asset('images/logo_narsa.png') }}" style="width:100px;">
+
+        <div style="margin-top:5px; font-weight:bold;">
+            NARSA<br>
+            الوكالة الوطنية للسلامة الطرقية
+        </div>
+    </div>
+
+</div>
+
+    <!-- NUMBER -->
+    <div style="text-align:right;">
         <p>رقم: 2021 / <span class="empty-space"></span></p>
     </div>
 
+    <!-- TITLE -->
     <div class="doc-title">شهادة العمل</div>
 
+    <!-- BODY -->
     <div class="doc-body">
-        <p>إن السيد المدير الجهوي للوكالة الوطنية للسلامة الطرقية لجهة العيون الساقية الحمراء - الداخلة وادي الذهب يشهد أن السيد(ة):</p>
-        
+
+        <p>
+            إن السيد المدير الجهوي للوكالة الوطنية للسلامة الطرقية لجهة العيون الساقية الحمراء - الداخلة وادي الذهب يشهد أن السيد(ة):
+        </p>
+
         <div class="info-row">
-            <p><strong>الاسم العائلي والشخصي:</strong> <span class="empty-space">{{ $emp->nom_prenom }}</span></p>
-            <p><strong>الإطار:</strong> <span class="empty-space">{{ $emp->grade }}</span></p>
-            <p><strong>تاريخ التعيين بالمديرية:</strong> <span class="empty-space"></span></p>
-            <p><strong>رقم التأجير:</strong> <span class="empty-space">{{ $emp->drpp }}</span></p>
-            <p><strong>رقم ب.ت.و:</strong> <span class="empty-space">{{ $emp->cin }}</span></p>
+
+            <p><strong>الاسم:</strong> <span class="empty-space">{{ $employee->nom_prenom }}</span></p>
+
+            <p><strong>الإطار:</strong> <span class="empty-space">{{ $employee->grade }}</span></p>
+
+            <p><strong>رقم التأجير:</strong> <span class="empty-space">{{ $employee->drpp }}</span></p>
+
+            <p><strong>رقم ب.ت.و:</strong> <span class="empty-space">{{ $employee->cin }}</span></p>
+
         </div>
 
-        <p style="margin-top: 30px;">
-            يعمل <span class="empty-space"></span> بالمديرية الجهوية للوكالة الوطنية للسلامة الطرقية لجهة العيون الساقية الحمراء - الداخلة وادي الذهب.
+        <p>
+            يعمل بالمديرية الجهوية للوكالة الوطنية للسلامة الطرقية لجهة العيون الساقية الحمراء – الداخلة وادي الذهب.
         </p>
-        
+
         <p>وقد سلمت له هذه الشهادة بطلب منه للإدلاء بها عند الاقتضاء.</p>
+
     </div>
 
+    <!-- SIGNATURE -->
     <div class="signature-section">
-        <p>العيون في: ...........................</p>
-        <p style="margin-top: 15px; font-weight: bold;">
-            عن المدير الجهوي للوكالة الوطنية للسلامة الطرقية لجهة العيون الساقية الحمراء – الداخلة وادي الذهب
-        </p>
+        <p>العيون في: ....................</p>
+        <p><b>عن المدير الجهوي</b></p>
     </div>
 
+    <!-- FOOTER -->
     <div class="doc-footer">
-        <div class="footer-content">
-            <p>ملتقى شارع الزرقطوني بشارع الأمين فيلا الخير حي مولاي رشيد العيون</p>
-            <p>Croisement Avenue Zarqtouni et Avenue Amin Villa el Khayr hay My Rachid Laayoune</p>
-            <p>Fax: 0528997251 Tel: 0528891774</p>
-        </div>
+        <p>العيون - المغرب | NARSA</p>
     </div>
+
+</div>
 
 </body>
-</html>
+</html> 

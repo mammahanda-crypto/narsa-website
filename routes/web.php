@@ -42,11 +42,14 @@ Route::middleware('auth')->group(function () {
     Route::get('/documents', [DocumentController::class, 'index']);
 
     // Employee & Attestations (المسارات المهمة)
-    Route::get('/employees/{id}/attestation', [EmployeeController::class, 'showAttestation'])->name('employees.attestation');
-    Route::get('/employees/{employee}/attestation-ar', [EmployeeController::class, 'showAttestation'])->name('employees.attestationAr');
-    
-    Route::resource('employees', EmployeeController::class);
-
+Route::get('/employees/{id}/attestation', [EmployeeController::class, 'showAttestation'])
+    ->name('employees.attestation');
+Route::get('/employees', [EmployeeController::class, 'index'])
+    ->name('employees.index');
+Route::get('/employees/create', [EmployeeController::class, 'create'])
+    ->name('employees.create');
+Route::get('/employees/{id}/attestation-ar', [EmployeeController::class, 'showAttestationAr'])
+    ->name('employees.attestationAr');
     // Profile
     Route::middleware(['auth'])->group(function () {
         Route::get('/profile', [ProfileController::class, 'edit'])

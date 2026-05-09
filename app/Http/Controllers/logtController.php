@@ -5,35 +5,48 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Storage;
 use App\Models\Document;
-use App\Http\Controllers\Controller;
 
 class logtController extends Controller
 {
     /**
-     * 0. INDEX
-     * Bach t-jib ga3 l-PDFs li 3ndek f la base de données
+     * INDEX (Search + Order + Pagination)
      */
-    public function index()
+    public function index(Request $request)
     {
-        // Kan-jibo ga3 l-fichiers, m-rattbin men l-jdid l-9dim
-        $documents = Document::orderBy('created_at', 'desc')->get();
+        $query = Document::query();
 
-        // Kat-retourner l-view dyalk (smiha masalan index.blade.php)
+        // SEARCH
+        if ($request->filled('search')) {
+            $search = trim($request->search);
+
+            $query->where('title', 'like', '%' . $search . '%');
+        }
+
+        // ORDER
+        $order = $request->get('order', 'desc');
+        $query->orderBy('created_at', $order);
+
+        // PAGINATION
+        $documents = $query->paginate(10)->appends([
+            'search' => $request->search,
+            'order'  => $order,
+        ]);
+
         return view('documents.index', compact('documents'));
     }
 
     /**
-     * 1. AJOUTER (Upload)
+     * STORE (Upload PDF)
      */
     public function store(Request $request)
     {
-        $documents = Document::orderBy('created_at', 'desc')->get();
         $request->validate([
             'title'    => 'required|string|max:255',
             'pdf_file' => 'required|mimes:pdf|max:10000',
         ]);
 
         if ($request->hasFile('pdf_file')) {
+
             $path = $request->file('pdf_file')->store('pdfs', 'public');
 
             Document::create([
@@ -41,16 +54,16 @@ class logtController extends Controller
                 'file_path' => $path,
             ]);
 
-            // return back()->with('success', 'The File Was Added Successfully!');
-        return view('documents.index', compact('documents'));
-
+            return redirect()
+                ->route('documents.index')
+                ->with('success', 'The File Was Added Successfully!');
         }
 
         return back()->with('error', 'An Error Occured.');
     }
 
     /**
-     * 2. MODIFIER (Update)
+     * UPDATE
      */
     public function update(Request $request, $id)
     {
@@ -64,39 +77,57 @@ class logtController extends Controller
         $doc->title = $request->title;
 
         if ($request->hasFile('pdf_file')) {
-            if (Storage::disk('public')->exists($doc->file_path)) {
+
+            // delete old file
+            if ($doc->file_path && Storage::disk('public')->exists($doc->file_path)) {
                 Storage::disk('public')->delete($doc->file_path);
             }
 
+            // upload new file
             $newPath = $request->file('pdf_file')->store('pdfs', 'public');
             $doc->file_path = $newPath;
         }
 
         $doc->save();
 
-        // return back()->with('success', 'PDF t-modifia b nija7!');
-            $documents = Document::orderBy('created_at', 'desc')->get();
-            return view('documents.index', compact('documents'));
-
+        return redirect()
+            ->route('documents.index')
+            ->with('success', 'PDF t-modifia b nija7!');
     }
 
     /**
-     * 3. SUPPRIMER (Delete)
+     * DELETE
      */
     public function destroy($id)
     {
         $doc = Document::findOrFail($id);
-        Storage::disk('public')->delete($doc->file_path);
+
+        if ($doc->file_path && Storage::disk('public')->exists($doc->file_path)) {
+            Storage::disk('public')->delete($doc->file_path);
+        }
+
         $doc->delete();
 
-        return back()->with('success', 'PDF t-mseh b l-kamel!');
+        return redirect()
+            ->route('documents.index')
+            ->with('success', 'PDF t-mseh b l-kamel!');
     }
-    public function create() {
-    return view('documents.create');
-}
 
-public function edit($id) {
-    $doc = Document::findOrFail($id);
-    return view('documents.edit', compact('doc'));
-}
+    /**
+     * CREATE VIEW
+     */
+    public function create()
+    {
+        return view('documents.create');
+    }
+
+    /**
+     * EDIT VIEW
+     */
+    public function edit($id)
+    {
+        $doc = Document::findOrFail($id);
+
+        return view('documents.edit', compact('doc'));
+    }
 }

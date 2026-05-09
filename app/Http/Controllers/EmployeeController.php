@@ -29,14 +29,19 @@ class EmployeeController extends Controller
     }
 
     // دالة عرض شهادة العمل للطباعة
-    public function showAttestation($id)
-    {
-        $employee = Employee::findOrFail($id);
-        
-        // تم تغيير المسار هنا ليتطابق مع اسم ملف الـ Blade الذي تملكه فعلياً
-        return view('employees.attestation_fr', compact('employee'));
-    }
+public function showAttestation($id)
+{
+    $employee = Employee::findOrFail($id);
 
+    return view('employees.attestation_fr', compact('employee'));
+}
+
+public function showAttestationAr($id)
+{
+    $employee = Employee::findOrFail($id);
+
+    return view('employees.attestation_ar', compact('employee'));
+}
     public function create()
     {
         return view('employees.create');

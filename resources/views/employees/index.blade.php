@@ -33,7 +33,7 @@
                             </tr>
                         </thead>
                         <tbody class="divide-y divide-gray-200 text-sm">
-                            @forelse($employees as $emp)
+                            @forelse($employees  as $emp)
                             <tr class="hover:bg-gray-50">
                                 <td class="px-6 py-4 font-bold text-gray-900">{{ $emp->nom_prenom }}</td>
                                 <td class="px-6 py-4 text-gray-600">{{ $emp->grade }}</td>
@@ -46,8 +46,8 @@
                                     <a href="{{ route('employees.attestation', $emp->id) }}" class="text-blue-800 hover:underline" target="_blank">FRANÇAIS</a>
                                 </td>
                                 <td class="px-6 py-4 text-right space-x-3">
-                                    <a href="{{ route('employees.edit', $emp->id) }}" class="text-yellow-600">Modifier</a>
-                                    <form action="{{ route('employees.destroy', $emp->id) }}" method="POST" class="inline">
+                                    <a href="{{ route('documents.update', $emp->id) }}" class="text-yellow-600">Modifier</a>
+                                    <form action="{{ route('documents.destroy', $emp->id) }}" method="POST" class="inline">
                                         @csrf @method('DELETE')
                                         <button class="text-red-600 font-bold hover:underline">Supprimer</button>
                                     </form>
